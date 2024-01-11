@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votami!</title>
+    <meta name="theme-color" content="#161687"> <!-- Colore barra per Android -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#161687"> <!-- Stile barra per Safari iOS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+			 background-color: #161687;          
+        }
+        .container {
+            width: 100vw;
+            height: calc(100vw * (1920 / 1080));
+            background-image: url('il_volo.png');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Mantiene il contenuto centrato */
+            overflow: hidden;
+        }
+        .button {
+            width: 170px; /* Larghezza del pulsante */
+            height: 46px; /* Altezza del pulsante */
+            background-image: url('tasto.png');
+            background-size: cover;
+            border: none;
+            margin-top: 85%; /* Sposta il pulsante verso il basso */
+			
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" id="messageLink" class="button"></a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // iOS detection
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                document.getElementById("messageLink").href = "sms:894001&body=06";
+            } else { // Default to Android
+                document.getElementById("messageLink").href = "sms:894001?body=06";
+            }
+        });
+    </script>
+</body>
+</html>
