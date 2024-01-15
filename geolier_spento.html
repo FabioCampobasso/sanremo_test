@@ -45,10 +45,19 @@
     position: absolute; /* Posizionamento assoluto */
     left: 50%; /* Sposta il pulsante a metà del contenitore */
     transform: translateX(-50%); /* Centra il pulsante orizzontalmente */
+	    text-decoration: none;
+
 }
 
-
-
+        canvas {
+            position: absolute;
+			pointer-events: none;
+        }
+		#link1{
+		            width: 100vw;
+            height: calc(100vw * (200 / 1080));
+			margin-top:-20px;
+	}
 	
     </style>
 </head>
@@ -56,8 +65,9 @@
     <div class="container">
         <a href="#" id="messageLink" class="button"></a>
             <a href="https://open.spotify.com/intl-it/track/5x9LonDyHxGUO2VzfHJHLE?si=17aa071fabe44464" id="shareButton">Ascolta il brano</a>
+			<canvas></canvas>
     </div>
-	
+	<img id="link1" src="powered_by.png" alt="Immagine 1">
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -71,7 +81,66 @@
             }
         });
 
+	document.addEventListener("DOMContentLoaded", function() {
+    var canvas = document.querySelector("canvas");
+    var ctx = canvas.getContext("2d");
 
+    // Impostare la dimensione del canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var particles = [];
+
+    // Creare particelle
+    function init() {
+        for (var i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1 + 0.2,
+                speed: Math.random() * 0.2 + 0.2
+            });
+        }
+    }
+
+    // Disegnare le particelle
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#df43e2";
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Aggiornare le particelle
+    function update() {
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.y -= p.speed;
+            if (p.y < 0) {
+                particles[i] = {
+                    x: Math.random() * canvas.width,
+                    y: canvas.height,
+                      size: Math.random() * 1 + 0.2,
+                speed: Math.random() * 0.2 + 0.2
+                };
+            }
+        }
+    }
+
+    // Animazione
+    function animate() {
+        draw();
+        update();
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+});
     </script>
 </body>
 </html>
