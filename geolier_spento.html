@@ -5,7 +5,7 @@
     <meta property="og:image" content="anteprima.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votami!</title>
+    
     <meta name="theme-color" content="#161687"> <!-- Colore barra per Android -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#161687"> <!-- Stile barra per Safari iOS -->
     <style>
@@ -70,24 +70,7 @@
                 document.getElementById("messageLink").href = "sms:894001?body=07";
             }
         });
-		document.addEventListener("DOMContentLoaded", function() {
-    var shareButton = document.getElementById("shareButton");
 
-    shareButton.addEventListener('click', function() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Condividi questa pagina',
-                url: window.location.href
-            }).then(() => {
-                console.log('Grazie per la condivisione!');
-            })
-            .catch(console.error);
-        } else {
-            // Gestisci i browser che non supportano navigator.share
-            console.log('La condivisione non è supportata su questo browser.');
-        }
-    });
-});
 
     </script>
 </body>
