@@ -15,6 +15,7 @@
 			 background-color: #161687;          
         }
         .container {
+		position: relative;
             width: 100vw;
             height: calc(100vw * (1920 / 1080));
             background-image: url('geolier.png');
@@ -69,15 +70,20 @@
             height: calc(100vw * (115 / 1080));
 			margin-top:-20px;
 	}
-	
+
+
+
+
 	.infoButton {
     /* Stile del tuo bottone */
 }
 
+
+
 .infoText {
     display: none; /* Nascondi inizialmente la tendina */
     position: absolute; /* Posizionamento assoluto */
-    bottom: 46%; /* Distanza dal fondo, regola in base all'altezza del tuo bottone */
+    top: 46%; /* Distanza dal fondo, regola in base all'altezza del tuo bottone */
     width: 200px; /* Larghezza della tendina */
     height: 95px; /* Altezza della tendina */
     background-color: #fff; /* Sfondo bianco, cambialo come preferisci */
@@ -85,7 +91,7 @@
       text-align: justify;
     border: none; /* Bordo (opzionale) */
     padding: 15px; /* Spazio interno */
-	    font-size: 9.5px; /* Dimensione del testo */
+	    font-size: 10px; /* Dimensione del testo */
 		border-radius: 5px;
 
 }
@@ -100,9 +106,9 @@
 <body>
 
     <div class="container">
-	<button id="infoButton" class="infoButton">🛈 Come funziona?</button>
+	<button id="infoButton" class="infoButton">Come funziona?</button>
 <div id="infoText" class="infoText">
-🛈 Per votare al Festival di Sanremo, invia un SMS al numero 894001
+Per votare al Festival di Sanremo, invia un SMS al numero 894001
 con il codice del tuo artista preferito.<br> 
 Ogni messaggio ha un costo di 0,50 €
 e puoi inviare fino a un massimo di 5 voti.<br>
