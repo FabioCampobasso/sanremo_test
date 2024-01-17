@@ -18,7 +18,7 @@
         .container {
             width: 100vw;
             height: calc(100vw * (1920 / 1080));
-            background-image: url('geolier.png');
+            background-image: url('mahmood.png');
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -35,7 +35,7 @@
 			pointer-events: none;
         }
 		
-#shareButton {
+#shareButton { /* sarebbe ascolta il brano */
     background-color: transparent; /* Sfondo trasparente */
     color: white; /* Colore del testo bianco */
     border: none; /* Nessun bordo */
@@ -53,18 +53,20 @@
             position: absolute;
 			pointer-events: none;
         }
-		#link1{
-		            width: 100vw;
+        #link1 {
+            width: 100vw;
             height: calc(100vw * (115 / 1080));
-			margin-top:-20px;
-	}
+            position: absolute; /* Aggiunta per posizionamento assoluto */
+            bottom: 0; /* Posiziona l'immagine in fondo alla pagina */
+            left: 0; /* Allinea l'immagine a sinistra */
+        }
 	
     </style>
 </head>
 <body>
     <div class="container">
         <a href="#" id="messageLink" class="button"></a>
-            <a href="https://open.spotify.com/intl-it/track/5x9LonDyHxGUO2VzfHJHLE?si=17aa071fabe44464" id="shareButton">Ascolta il brano</a>
+            <a href="https://open.spotify.com/intl-it/track/1HuXy8Ra2kevcqhx1xt5GQ?si=96f27927e6264302" id="shareButton">Ascolta il brano</a>
 			<canvas></canvas>
     </div>
 		<a href="https://www.explodingbands.it/" target="_blank">
