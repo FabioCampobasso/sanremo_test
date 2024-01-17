@@ -24,6 +24,7 @@
             justify-content: center;
             align-items: center; /* Mantiene il contenuto centrato */
             overflow: hidden;
+			
         }
         .button {
             width: 170px; /* Larghezza del pulsante */
@@ -39,24 +40,24 @@
     background-color: transparent; /* Sfondo trasparente */
     color: white; /* Colore del testo bianco */
     border: none; /* Nessun bordo */
-    font-size: 18px; /* Dimensione del testo */
+    font-size: 14px; /* Dimensione del testo */
     text-align: center; /* Testo centrato */
-    margin-top: 110%; /* Spazio sopra il pulsante */
+    margin-top: 109%; /* Spazio sopra il pulsante */
     position: absolute; /* Posizionamento assoluto */
-    left: 50%; /* Sposta il pulsante a metà del contenitore */
-    transform: translateX(-50%); /* Centra il pulsante orizzontalmente */
+margin-left: 114px;
+z-index: 5px;
 }
 
 #infoButton {
     background-color: transparent; /* Sfondo trasparente */
     color: white; /* Colore del testo bianco */
     border: none; /* Nessun bordo */
-    font-size: 13px; /* Dimensione del testo */
+    font-size: 14px; /* Dimensione del testo */
     text-align: center; /* Testo centrato */
-    margin-top: 65%; /* Spazio sopra il pulsante */
+    margin-top: 109%; /* Spazio sopra il pulsante */
     position: absolute; /* Posizionamento assoluto */
-    left: 50%; /* Sposta il pulsante a metà del contenitore */
-    transform: translateX(-50%); /* Centra il pulsante orizzontalmente */
+margin-left: -61px;
+z-index: 5px;
 }
 
 
@@ -65,11 +66,13 @@
 			pointer-events: none;
         }
 		
-		#link1{
-		            width: 100vw;
+        #link1 {
+            width: 100vw;
             height: calc(100vw * (115 / 1080));
-			margin-top:-20px;
-	}
+            position: absolute; /* Aggiunta per posizionamento assoluto */
+            bottom: 0; /* Posiziona l'immagine in fondo alla pagina */
+            left: 0; /* Allinea l'immagine a sinistra */
+        }
 
 
 
@@ -83,15 +86,15 @@
 .infoText {
     display: none; /* Nascondi inizialmente la tendina */
     position: absolute; /* Posizionamento assoluto */
-    top: 46%; /* Distanza dal fondo, regola in base all'altezza del tuo bottone */
+    margin-top: 35%; /* Distanza dal fondo, regola in base all'altezza del tuo bottone */
     width: 200px; /* Larghezza della tendina */
-    height: 100px; /* Altezza della tendina */
+    height: 95px; /* Altezza della tendina */
     background-color: #fff; /* Sfondo bianco, cambialo come preferisci */
     color: #161687; /* Colore del testo */
       text-align: justify;
     border: none; /* Bordo (opzionale) */
-    padding: 12px; /* Spazio interno */
-	    font-size: 9px; /* Dimensione del testo */
+    padding: 15px; /* Spazio interno */
+	    font-size: 10px; /* Dimensione del testo */
 		border-radius: 5px;
 
 }
@@ -106,17 +109,18 @@
 <body>
 
     <div class="container">
-	<button id="infoButton" class="infoButton">Come funziona?</button>
+	
 <div id="infoText" class="infoText">
 Per votare al Festival di Sanremo, invia un SMS al numero 894001
-con il codice del tuo artista preferito. 
+con il codice del tuo artista preferito.<br> 
 Ogni messaggio ha un costo di 0,50 €
-e puoi inviare fino a un massimo di 5 voti.
-I voti sono validi solo se inviati durante i periodi annunciati nella trasmissione.
+e puoi inviare fino a un massimo di 5 voti.<br>
+I voti sono validi solo se inviati durante i periodi annunciati nella trasmissione.<br>
 Dopo il clic avrai la possibilità di controllare il codice e decidere se inviarlo o meno. 
 </div>
         <a href="#" id="messageLink" class="button"></a>
-        <button id="shareButton" class="shareButton">Condividi</button>
+            <span id="infoButton">Come funziona? |</span> <span id="shareButton">Condividi</span>
+
 		<canvas></canvas>
     </div>
 	<a href="https://www.explodingbands.it/" target="_blank">
