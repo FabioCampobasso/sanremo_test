@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votami!</title>
+    <meta name="theme-color" content="#161687"> <!-- Colore barra per Android -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#161687"> <!-- Stile barra per Safari iOS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+			 background-color: #161687;          
+        }
+        .container {
+		position: relative;
+            width: 100vw;
+            height: calc(100vw * (1920 / 1080));
+            background-image: url('mahmood.png');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Mantiene il contenuto centrato */
+            overflow: hidden;
+			
+        }
+        .button {
+            width: 170px; /* Larghezza del pulsante */
+            height: 46px; /* Altezza del pulsante */
+            background-image: url('tasto.png');
+            background-size: cover;
+            border: none;
+            margin-top: 85%; /* Sposta il pulsante verso il basso */
+			
+        }
+		
+#shareButton {
+    background-color: transparent; /* Sfondo trasparente */
+    color: white; /* Colore del testo bianco */
+    border: none; /* Nessun bordo */
+    font-size: 14px; /* Dimensione del testo */
+    text-align: center; /* Testo centrato */
+    margin-top: 109%; /* Spazio sopra il pulsante */
+    position: absolute; /* Posizionamento assoluto */
+margin-left: 114px;
+z-index: 5px;
+
+}
+
+#infoButton {
+    background-color: transparent; /* Sfondo trasparente */
+    color: white; /* Colore del testo bianco */
+    border: none; /* Nessun bordo */
+    font-size: 14px; /* Dimensione del testo */
+    text-align: center; /* Testo centrato */
+    margin-top: 109%; /* Spazio sopra il pulsante */
+    position: absolute; /* Posizionamento assoluto */
+margin-left: -61px;
+z-index: 5px;
+}
+
+
+        canvas {
+            position: absolute;
+			pointer-events: none;
+        }
+		
+        #link1 {
+            width: 100vw;
+            height: calc(100vw * (115 / 1080));
+            position: absolute; /* Aggiunta per posizionamento assoluto */
+            bottom: 0; /* Posiziona l'immagine in fondo alla pagina */
+            left: 0; /* Allinea l'immagine a sinistra */
+        }
+
+
+
+
+	.infoButton {
+    /* Stile del tuo bottone */
+}
+
+
+
+.infoText {
+    display: none; /* Nascondi inizialmente la tendina */
+    position: absolute; /* Posizionamento assoluto */
+    margin-top: 34%; /* Distanza dal fondo, regola in base all'altezza del tuo bottone */
+    width: 220px; /* Larghezza della tendina */
+    height: 105px; /* Altezza della tendina */
+    background-color: #fff; /* Sfondo bianco, cambialo come preferisci */
+    color: #161687; /* Colore del testo */
+      text-align: justify;
+    border: none; /* Bordo (opzionale) */
+    padding: 10px; /* Spazio interno */
+	    font-size: 10px; /* Dimensione del testo */
+		border-radius: 5px;
+ overflow: auto;
+ 
+}
+
+/* Stile quando la tendina è visibile */
+.infoText.show {
+    display: block;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+	
+<div id="infoText" class="infoText">
+Per votare al Festival di Sanremo, invia un SMS al numero 894001
+con il codice del tuo artista preferito.
+Ogni messaggio ha un costo di 0,50 €
+e puoi inviare fino a un massimo di 5 voti.
+I voti sono validi solo se inviati durante i periodi annunciati nella trasmissione.
+Dopo il clic avrai la possibilità di controllare il codice e decidere se inviarlo o meno. 
+
+</div>
+        <a href="#" id="messageLink" class="button"></a>
+            <span id="infoButton">Come funziona? |</span> <span id="shareButton">Condividi</span>
+
+		<canvas></canvas>
+    </div>
+	<a href="https://www.explodingbands.it/" target="_blank">
+    <img id="link1" src="powered_by.png" alt="Immagine 1">
+</a>
+
+	
+
+    <script>
+	
+	
+	
+        document.addEventListener("DOMContentLoaded", function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // iOS detection
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                document.getElementById("messageLink").href = "sms:894001&body=12";
+            } else { // Default to Android
+                document.getElementById("messageLink").href = "sms:894001?body=12";
+            }
+        });
+		document.addEventListener("DOMContentLoaded", function() {
+    var shareButton = document.getElementById("shareButton");
+
+    shareButton.addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Condividi questa pagina',
+                url: window.location.href
+            }).then(() => {
+                console.log('Grazie per la condivisione!');
+            })
+            .catch(console.error);
+        } else {
+            // Gestisci i browser che non supportano navigator.share
+            console.log('La condivisione non è supportata su questo browser.');
+        }
+    });
+});
+
+	document.addEventListener("DOMContentLoaded", function() {
+    var canvas = document.querySelector("canvas");
+    var ctx = canvas.getContext("2d");
+
+    // Impostare la dimensione del canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var particles = [];
+
+    // Creare particelle
+    function init() {
+        for (var i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1 + 0.2,
+                speed: Math.random() * 0.2 + 0.2
+            });
+        }
+    }
+
+    // Disegnare le particelle
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#df43e2";
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Aggiornare le particelle
+    function update() {
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.y -= p.speed;
+            if (p.y < 0) {
+                particles[i] = {
+                    x: Math.random() * canvas.width,
+                    y: canvas.height,
+                      size: Math.random() * 1 + 0.2,
+                speed: Math.random() * 0.2 + 0.2
+                };
+            }
+        }
+    }
+
+    // Animazione
+    function animate() {
+        draw();
+        update();
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+});
+
+document.getElementById('infoButton').addEventListener('click', function() {
+    var infoText = document.getElementById('infoText');
+    if (infoText.classList.contains('show')) {
+        infoText.classList.remove('show');
+    } else {
+        infoText.classList.add('show');
+    }
+});
+
+    </script>
+</body>
+</html>
