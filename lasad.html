@@ -233,6 +233,21 @@ document.getElementById('infoButton').addEventListener('click', function() {
     }
 });
 
+document.getElementById('messageLink').addEventListener('click', function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "click_lasad.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log("Risposta dal server: " + xhr.responseText);
+        } else {
+            console.log("Errore nella richiesta");
+        }
+    };
+});
+
     </script>
 </body>
 </html>
