@@ -4,20 +4,23 @@
     <title>Condividi su Instagram</title>
 </head>
 <body>
-    <img src="lasad.png" alt="Immagine da Condividere" id="imageToShare">
-    <button onclick="shareToInstagram()">Condividi su Instagram</button>
+    <button onclick="shareImage()">Condividi su Instagram</button>
 
     <script>
-        function shareToInstagram() {
-            const imageToShare = document.getElementById('imageToShare');
+        function shareImage() {
             if (navigator.share) {
-                navigator.share({
-                    files: [imageToShare.files[0]],
+                // Crea un oggetto con le informazioni dell'immagine (URL)
+                const imageUrl = 'lasad.png'; // Sostituisci con l'URL dell'immagine da condividere
+                const shareData = {
                     title: 'Condividi su Instagram',
-                    text: 'Ecco un\'immagine interessante che ho trovato!'
-                })
-                .then(() => console.log('Condivisione riuscita.'))
-                .catch((error) => console.log('Errore nella condivisione:', error));
+                    text: 'Ecco un\'immagine interessante che ho trovato!',
+                    url: imageUrl
+                };
+
+                // Utilizza l'API di condivisione per aprire il pannello di condivisione
+                navigator.share(shareData)
+                    .then(() => console.log('Condivisione riuscita.'))
+                    .catch((error) => console.log('Errore nella condivisione:', error));
             } else {
                 // Opzione di fallback se la condivisione nativa non è supportata
                 console.log('La condivisione nativa non è supportata su questo browser.');
