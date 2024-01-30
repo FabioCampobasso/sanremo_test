@@ -4,15 +4,17 @@
     <title>Condividi su Instagram</title>
 </head>
 <body>
+    <img src="lasad.png" alt="Immagine da Condividere" id="imageToShare">
     <button onclick="shareToInstagram()">Condividi su Instagram</button>
 
     <script>
         function shareToInstagram() {
+            const imageToShare = document.getElementById('imageToShare');
             if (navigator.share) {
                 navigator.share({
+                    files: [imageToShare.files[0]],
                     title: 'Condividi su Instagram',
-                    text: 'Ecco un\'immagine interessante che ho trovato!',
-                    url: 'lasad.png' // Inserisci l'URL dell'immagine da condividere
+                    text: 'Ecco un\'immagine interessante che ho trovato!'
                 })
                 .then(() => console.log('Condivisione riuscita.'))
                 .catch((error) => console.log('Errore nella condivisione:', error));
