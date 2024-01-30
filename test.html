@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Condividi su Instagram</title>
+    <title>Scarica e Condividi</title>
 </head>
 <body>
-    <button onclick="shareImage()">Condividi su Instagram</button>
+    <!-- Pulsante per scaricare e condividere l'immagine -->
+    <button onclick="scaricaECondividi()">Scarica e Condividi</button>
 
     <script>
-        function shareImage() {
+        function scaricaECondividi() {
+            // URL dell'immagine da scaricare e condividere
+            const imageUrl = 'lasad.png'; // Assicurati che questo sia il percorso corretto dell'immagine
+
+            // Creazione di un elemento link per scaricare l'immagine
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'lasad.png'; // Questo è il nome del file salvato
+            document.body.appendChild(link);
+            link.click(); // Innesca il download dell'immagine
+            document.body.removeChild(link);
+
+            // Dopo il download, tenta di aprire il pannello di condivisione
             if (navigator.share) {
-                // Crea un oggetto con le informazioni dell'immagine (URL)
-                const imageUrl = 'lasad.png'; // Sostituisci con l'URL dell'immagine da condividere
-                const shareData = {
+                navigator.share({
                     title: 'Condividi su Instagram',
                     text: 'Ecco un\'immagine interessante che ho trovato!',
-                    url: imageUrl
-                };
-
-                // Utilizza l'API di condivisione per aprire il pannello di condivisione
-                navigator.share(shareData)
-                    .then(() => console.log('Condivisione riuscita.'))
-                    .catch((error) => console.log('Errore nella condivisione:', error));
+                    url: window.location.href + imageUrl // Condivide l'URL dell'immagine
+                })
+                .then(() => console.log('Condivisione riuscita.'))
+                .catch((error) => console.log('Errore nella condivisione:', error));
             } else {
-                // Opzione di fallback se la condivisione nativa non è supportata
                 console.log('La condivisione nativa non è supportata su questo browser.');
             }
         }
     </script>
 </body>
 </html>
+
