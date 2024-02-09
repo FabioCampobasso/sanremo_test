@@ -1,39 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Scarica e Condividi</title>
+    <meta charset="UTF-8">
+    <title>Aggiungi Promemoria</title>
 </head>
 <body>
-    <!-- Pulsante per scaricare e condividere l'immagine -->
-    <button onclick="scaricaECondividi()">Scarica e Condividi</button>
 
-    <script>
-        function scaricaECondividi() {
-            // URL dell'immagine da scaricare e condividere
-            const imageUrl = 'lasad.png'; // Assicurati che questo sia il percorso corretto dell'immagine
+<!-- Link per aggiungere un evento a Google Calendar -->
+<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Televota+Geolier&details=Partecipa+al+televoto+di+Geolier!&location=&dates=20240209T123500Z/20240209T130500Z" target="_blank" rel="noopener noreferrer">Aggiungi Promemoria per Televotare Geolier alle 12:35 del 09/02/2024</a>
 
-            // Creazione di un elemento link per scaricare l'immagine
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = 'lasad.png'; // Questo è il nome del file salvato
-            document.body.appendChild(link);
-            link.click(); // Innesca il download dell'immagine
-            document.body.removeChild(link);
-
-            // Dopo il download, tenta di aprire il pannello di condivisione
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Condividi su Instagram',
-                    text: 'Ecco un\'immagine interessante che ho trovato!',
-                    url: window.location.href + imageUrl // Condivide l'URL dell'immagine
-                })
-                .then(() => console.log('Condivisione riuscita.'))
-                .catch((error) => console.log('Errore nella condivisione:', error));
-            } else {
-                console.log('La condivisione nativa non è supportata su questo browser.');
-            }
-        }
-    </script>
 </body>
 </html>
-
