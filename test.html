@@ -1,13 +1,57 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aggiungi Promemoria</title>
+    <title>Aggiungi Evento al Calendario</title>
 </head>
 <body>
 
-<!-- Link per aggiungere un evento a Google Calendar -->
-<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Televota+Geolier&details=Partecipa+al+televoto+di+Geolier!&location=&dates=20240209T122100Z/20240209T130500Z" target="_blank" rel="noopener noreferrer">Aggiungi Promemoria per Televotare Geolier alle 12:35 del 09/02/2024</a>
+<button onclick="aggiungiEventoAlCalendario()">Aggiungi Evento al Calendario</button>
+
+<script>
+function aggiungiEventoAlCalendario() {
+    // Ottieni la data corrente nel formato AAAAMMGG
+    var dataCorrente = new Date().toISOString().split('T')[0].replace(/-/g, '');
+
+    // Definisci i dettagli dell'evento
+    var titolo = "Vota Geolier";
+    var descrizione = "votafestival.it/geolier.html";
+    var inizio = dataCorrente + "T123500"; // Aggiungi l'orario al formato data
+    var fine = dataCorrente + "T133500"; // Supponiamo un'ora di durata
+
+    // Crea il contenuto del file .ics, includendo un allarme che scatta all'inizio dell'evento
+    var contenutoICS = "BEGIN:VCALENDAR\n" +
+                       "VERSION:2.0\n" +
+                       "BEGIN:VEVENT\n" +
+                       "SUMMARY:" + titolo + "\n" +
+                       "DTSTART:" + inizio + "\n" +
+                       "DTEND:" + fine + "\n" +
+                       "DESCRIPTION:" + descrizione + "\n" +
+                       "BEGIN:VALARM\n" + // Inizio definizione allarme
+                       "TRIGGER:PT0S\n" + // Notifica esattamente all'orario di inizio
+                       "ACTION:DISPLAY\n" + // Mostra un messaggio
+                       "DESCRIPTION:Promemoria Evento\n" + // Testo del messaggio di notifica
+                       "END:VALARM\n" + // Fine definizione allarme
+                       "END:VEVENT\n" +
+                       "END:VCALENDAR";
+    
+    // Crea un Blob con il contenuto .ics
+    var blob = new Blob([contenutoICS], {type: "text/calendar;charset=utf-8"});
+    
+    // Crea un link temporaneo per il download del file
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute("download", "Vota_Geolier.ics");
+    
+    // Simula il click sul link per scaricare il file
+    document.body.appendChild(link);
+    link.click();
+    
+    // Rimuovi il link temporaneo
+    document.body.removeChild(link);
+}
+</script>
 
 </body>
 </html>
+
